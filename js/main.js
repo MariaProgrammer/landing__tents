@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {  
+document.addEventListener('DOMContentLoaded', () => {  
 //Плавный скролл
 const anchors = document.querySelectorAll('a[href*="#"]');
 
@@ -29,6 +29,28 @@ const btns = document.querySelector('.header__btns')
 
 
 //инициализация слайдера
+const swiper1 = new Swiper('.swiper1', {
+  slidesPerView: 1,
+  slidesPerGroup: 1,
+  centeredSlides: true,
+  direction: 'horizontal', 
+  spaceBetween: 2,
+  lazy: true,
+  autoHeight: true,
+  loop: true,
+  rewind: true,
+  autoplay: {
+    delay: 3000, // задержка между слайдами в миллисекундах
+    // enabled: true,    
+    disableOnInteraction: true, // отключается при взаимодействии
+  },
+  pagination: {
+    el: '.swiper-pagination2',
+    type: 'bullets',
+    clickable: true,
+    dynamicBullets: true,
+  },
+});
 
 const swiper2 = new Swiper('.swiper2', {
   slidesPerView: 1,
@@ -58,10 +80,12 @@ function checkScreenAndInitSwiper() {
 
   if (mediaQuery.matches) {
     // Если разрешение больше или равно 768px, инициализируем Swiper
+    swiper1.init();
     swiper2.init();
     console.log("Swiper initialized");
   } else {
     // Если разрешение меньше 768px, уничтожаем Swiper
+    swiper1.destroy(true); // true - уничтожить слайды, false - не удалять элементы из DOM
     swiper2.destroy(true); // true - уничтожить слайды, false - не удалять элементы из DOM
     console.log("Swiper destroyed");
   }
