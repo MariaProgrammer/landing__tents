@@ -1,30 +1,73 @@
-// Плавный скролл
-// const anchors = document.querySelectorAll('a[href*="#"]');
+document.addEventListener('DOMContentLoaded', function() {  
+//Плавный скролл
+const anchors = document.querySelectorAll('a[href*="#"]');
 
-// for (let anchor of anchors) {
-//   anchor.addEventListener("click", function (e) {
-//     e.preventDefault();
+for (let anchor of anchors) {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
 
-//     const blockID = anchor.getAttribute("href").substring(1);
+    const blockID = anchor.getAttribute("href").substring(1);
 
-//     document.getElementById(blockID).scrollIntoView({
-//       behavior: "smooth",
-//       block: "start",
-//     });
-//   });
-// }
+    document.getElementById(blockID).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  });
+}
+//Анимация первого экрана
 const hero = document.querySelector('.header__inner')
 const title = document.querySelector('.header__title')
 const desc = document.querySelector('.header__desc')
 const btns = document.querySelector('.header__btns')
-console.log(hero)
-document.addEventListener('DOMContentLoaded', () => {
-  
+
+
   hero.classList.add('active')
   title.classList.add('active')
   desc.classList.add('active')
   btns.classList.add('active')
-})
+
+
+
+//инициализация слайдера
+
+const swiper2 = new Swiper('.swiper2', {
+  slidesPerView: 1,
+  slidesPerGroup: 1,
+  centeredSlides: true,
+  direction: 'horizontal', 
+  spaceBetween: 2,
+  lazy: true,
+  autoHeight: true,
+  loop: true,
+  rewind: true,
+  autoplay: {
+    delay: 3000, // задержка между слайдами в миллисекундах
+    // enabled: true,    
+    disableOnInteraction: true, // отключается при взаимодействии
+  },
+  pagination: {
+    el: '.swiper-pagination2',
+    type: 'bullets',
+    clickable: true,
+    dynamicBullets: true,
+  },
+});
+function checkScreenAndInitSwiper() {
+  // Устанавливаем нужный диапазон разрешений (например, от 768px)
+  const mediaQuery = window.matchMedia('(max-width: 665px)');
+
+  if (mediaQuery.matches) {
+    // Если разрешение больше или равно 768px, инициализируем Swiper
+    swiper2.init();
+    console.log("Swiper initialized");
+  } else {
+    // Если разрешение меньше 768px, уничтожаем Swiper
+    swiper2.destroy(true); // true - уничтожить слайды, false - не удалять элементы из DOM
+    console.log("Swiper destroyed");
+  }
+}
+checkScreenAndInitSwiper();
+window.addEventListener('resize', checkScreenAndInitSwiper);
 
 // Burger
 // const burger = document.getElementById("burger");
@@ -34,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // burger.addEventListener("click", () => {
 //   nav.classList.toggle("active");
 //   burger.classList.toggle("burger--active");
-  // document.body.classList.toggle("stop-scroll");
+// document.body.classList.toggle("stop-scroll");
 // });
 
 //cookies
@@ -80,11 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
 //   let recentCards5 = stepsHeight + recent.offsetHeight / 5;
 //   let techniqueHeight = recentCards + technique.offsetHeight / 3;
 
-  // if (scrollTop >= heroHeight / 3) {
-  //   steps.classList.add('active');
-  // } else {
-  //   steps.classList.remove('active');
-  // }
+// if (scrollTop >= heroHeight / 3) {
+//   steps.classList.add('active');
+// } else {
+//   steps.classList.remove('active');
+// }
 
 //   if (scrollTop >= stepsHeight) {
 //     scrollCards1.forEach((card) => {
@@ -193,8 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //     let result = await response.text();
 
-    // alert(result)
-  // });
+// alert(result)
+// });
 
 //Плавное исчезновение placeholder
 
@@ -259,10 +302,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // });
 // aboutClinica.addEventListener("mouseover", () => {
 //   footerPopup.classList.add("active");
-  // document.body.classList.toggle("stop-scroll");
+// document.body.classList.toggle("stop-scroll");
 // });
 
 // footerPopup.addEventListener("mouseover", () => {
 // 	footerPopup.classList.add('active');
 
 // });
+});
