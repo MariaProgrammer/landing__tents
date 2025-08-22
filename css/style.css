@@ -1237,7 +1237,7 @@ body {
 }
 
 @media (max-width: 98rem) {
-  .products {
+  .products, .why {
     padding: 4rem 7rem;
   }
 
@@ -1343,7 +1343,7 @@ body {
     font-size: 2.9rem;
   }
 
-  .products {
+  .products, .why {
     padding: 60px 20px;
   }
 
@@ -1369,7 +1369,7 @@ body {
     height: 6.7rem;
   }
 
-  .products {
+  .products, .why {
     padding: 60px 0px;
   }
 }
