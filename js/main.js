@@ -1,3 +1,4 @@
+'use strict'
 document.addEventListener('DOMContentLoaded', () => {
   //Плавный скролл
   const anchors = document.querySelectorAll('a[href*="#"]');
@@ -99,12 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   //инициализация слайдера
   let swiper2 = document.querySelector('.swiper2')
-  // let swiperPagoda
-  // let swiperWhy
-  // let swiperDvuskat
+  let swiperPagoda
+  let swiperWhy
+  let swiperDvuskat
+
   let mql = window.matchMedia('(max-width: 665px)');
   if (mql.matches) {
-    let swiperPagoda = new Swiper('.swiper__pagoda', {
+    swiperPagoda = new Swiper('.swiper__pagoda', {
       slidesPerView: 1,
       slidesPerGroup: 1,
       centeredSlides: false,
@@ -122,12 +124,58 @@ document.addEventListener('DOMContentLoaded', () => {
       pagination: {
         el: '.swiper-pagination1',
         type: 'bullets',
-        clickable: true,        
+        clickable: true,
       },
-    });    
-    
-    let swiperWhy = new Swiper('.swiper__why', {
+    });
+
+    swiperWhy = new Swiper('.swiper__why', {
       slidesPerView: 1,
+      slidesPerGroup: 1,
+      centeredSlides: false,
+      spaceBetween: 8,
+      grabCursor: true,
+      init: true,
+      lazy: true,
+      autoHeight: true,
+      loop: true,
+      rewind: true,
+      autoplay: {
+        delay: 2000, // задержка между слайдами в миллисекундах         
+        disableOnInteraction: true, // отключается при взаимодействии
+      },
+      pagination: {
+        el: '.swiper-pagination2',
+        type: 'bullets',
+        clickable: true,
+      },
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    if (mql.matches) {
+      swiperPagoda = new Swiper('.swiper__pagoda', {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        centeredSlides: false,
+        spaceBetween: 8,
+        grabCursor: true,
+        init: true,
+        lazy: true,
+        autoHeight: true,
+        loop: true,
+        rewind: true,
+        autoplay: {
+          delay: 2000, // задержка между слайдами в миллисекундах         
+          disableOnInteraction: true, // отключается при взаимодействии
+        },
+        pagination: {
+          el: '.swiper-pagination1',
+          type: 'bullets',
+          clickable: true,
+        },
+      });
+      swiperWhy = new Swiper('.swiper__why', {
+        slidesPerView: 1,
         slidesPerGroup: 1,
         centeredSlides: false,
         spaceBetween: 8,
@@ -144,64 +192,16 @@ document.addEventListener('DOMContentLoaded', () => {
         pagination: {
           el: '.swiper-pagination2',
           type: 'bullets',
-          clickable: true,          
+          clickable: true,
         },
-    });
-  }
-
-  // window.addEventListener('resize', () => {
-  //   if (mql.matches) {
-  //     let swiperPagoda = new Swiper('.swiper__pagoda', {
-  //       slidesPerView: 1,
-  //       slidesPerGroup: 1,
-  //       centeredSlides: false,
-  //       spaceBetween: 8,
-  //       grabCursor: true,
-  //       init: true,
-  //       lazy: true,
-  //       autoHeight: true,
-  //       loop: true,
-  //       rewind: true,
-  //       autoplay: {
-  //         delay: 2000, // задержка между слайдами в миллисекундах         
-  //         disableOnInteraction: true, // отключается при взаимодействии
-  //       },
-  //       pagination: {
-  //         el: '.swiper-pagination1',
-  //         type: 'bullets',
-  //         clickable: true,          
-  //       },
-  //     });
-  //     let swiperWhy = new Swiper('.swiper__why', {
-  //       slidesPerView: 1,
-  //       slidesPerGroup: 1,
-  //       centeredSlides: false,
-  //       spaceBetween: 8,
-  //       grabCursor: true,
-  //       init: true,
-  //       lazy: true,
-  //       autoHeight: true,
-  //       loop: true,
-  //       rewind: true,
-  //       autoplay: {
-  //         delay: 2000, // задержка между слайдами в миллисекундах         
-  //         disableOnInteraction: true, // отключается при взаимодействии
-  //       },
-  //       pagination: {
-  //         el: '.swiper-pagination2',
-  //         type: 'bullets',
-  //         clickable: true,          
-  //       },
-  //     });
-  //   }
-
-    // } else {
-    //   swiperPagoda.destroy();
-    //   swiperWhy.destroy();
-    // }
-  // })
+      });
+    } else {
+      swiperPagoda.destroy();
+      swiperWhy.destroy();
+    }
+  })
   if (mql.matches && swiper2) {
-  swiperDvuskat = new Swiper('.swiper__dvuskat', {
+    swiperDvuskat = new Swiper('.swiper__dvuskat', {
       slidesPerView: 1,
       slidesPerGroup: 1,
       centeredSlides: false,
@@ -219,11 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
       pagination: {
         el: '.swiper-pagination3',
         type: 'bullets',
-        clickable: true,        
+        clickable: true,
       },
     });
   }
-  
+
   // const swiperReviews = new Swiper('.swiper__reviews', {
   //   slidesPerView: 1,
   //   slidesPerGroup: 1,
@@ -252,19 +252,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // });
 
 
-// popap
+  // popap
   const cross = document.querySelector('.cross')
   const btnConsult = document.querySelector('.btn__consult')
   const popap = document.querySelector('.popap')
-  
-  
+
+
   btnConsult.addEventListener('click', () => {
     popap.style.display = 'block'
-    
+
   })
   cross.addEventListener('click', () => {
     popap.style.display = 'none'
-    
+
   })
 
 
@@ -283,74 +283,74 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })
 
-  //Маска для тел
+//Маска для тел
 
-  // let selector = document.querySelector(".tel");
-  // let im = new Inputmask("(999) 999-99-99");
-  // im.mask(selector);
+// let selector = document.querySelector(".tel");
+// let im = new Inputmask("(999) 999-99-99");
+// im.mask(selector);
 
-  //Валидация и отправка
+//Валидация и отправка
 
-  // let validation = new JustValidate(".form");
+// let validation = new JustValidate(".form");
 
-  // validation
-  //   .addField("#name", [
-  //     {
-  //       rule: "required",
-  //       errorMessage: "Это обязательное поле для заполнения!",
-  //     },
-  //     {
-  //       rule: "minLength",
-  //       value: 2,
-  //       errorMessage: "Минимум 2 символа!",
-  //     },
-  //   ])
-  //   .addField("#tel", [
-  //     {
-  //       validator: (value) => {
-  //         const phone = selector.inputmask.unmaskedvalue();
-  //         return Boolean(Number(phone) && phone.length > 0);
-  //       },
-  //       errorMessage: "Введите телефон",
-  //     },
-  //     {
-  //       validator: (value) => {
-  //         const phone = selector.inputmask.unmaskedvalue();
-  //         return Boolean(Number(phone) && phone.length === 10);
-  //       },
-  //       errorMessage: "Введите телефон полностью",
-  //     },
-  //   ])
-  //   .onSuccess(async function () {
-  //     let data = {
-  //       name: document.getElementById("name").value,
-  //       tel: selector.inputmask.unmaskedvalue(),
-  //       msg: document.getElementById("msg").value,
-  //     };
+// validation
+//   .addField("#name", [
+//     {
+//       rule: "required",
+//       errorMessage: "Это обязательное поле для заполнения!",
+//     },
+//     {
+//       rule: "minLength",
+//       value: 2,
+//       errorMessage: "Минимум 2 символа!",
+//     },
+//   ])
+//   .addField("#tel", [
+//     {
+//       validator: (value) => {
+//         const phone = selector.inputmask.unmaskedvalue();
+//         return Boolean(Number(phone) && phone.length > 0);
+//       },
+//       errorMessage: "Введите телефон",
+//     },
+//     {
+//       validator: (value) => {
+//         const phone = selector.inputmask.unmaskedvalue();
+//         return Boolean(Number(phone) && phone.length === 10);
+//       },
+//       errorMessage: "Введите телефон полностью",
+//     },
+//   ])
+//   .onSuccess(async function () {
+//     let data = {
+//       name: document.getElementById("name").value,
+//       tel: selector.inputmask.unmaskedvalue(),
+//       msg: document.getElementById("msg").value,
+//     };
 
-  //     let response = await fetch("mail.php", {
-  //       method: "POST",
-  //       body: JSON.stringify(data),
-  //       headers: {
-  //         "Content-Type": "application/json; charset=UTF-8",
-  //       },
-  //     });
+//     let response = await fetch("mail.php", {
+//       method: "POST",
+//       body: JSON.stringify(data),
+//       headers: {
+//         "Content-Type": "application/json; charset=UTF-8",
+//       },
+//     });
 
-  //     let result = await response.text();
+//     let result = await response.text();
 
-  // alert(result)
-  // });
-  //смотрю данные инпута
-  // const formBtn = document.querySelector(".selection__btn")
-  // let selector = document.querySelector(".tel")
-  // console.log(selector)
-  // formBtn.addEventListener('submit', (e) => {
-  //   e.preventDefault()
-  //   console.log(selector.value)
-  // })
+// alert(result)
+// });
+//смотрю данные инпута
+// const formBtn = document.querySelector(".selection__btn")
+// let selector = document.querySelector(".tel")
+// console.log(selector)
+// formBtn.addEventListener('submit', (e) => {
+//   e.preventDefault()
+//   console.log(selector.value)
+// })
 
 
-  
+
 
 
 
