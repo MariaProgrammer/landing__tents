@@ -99,11 +99,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
   //инициализация слайдера
+  let swiperReviews = new Swiper('.swiper__reviews', {
+      slidesPerView: 2,
+      slidesPerGroup: 1,
+      centeredSlides: false,
+      spaceBetween: 20,
+      speed: 2500,
+      grabCursor: true,
+      init: true,
+      lazy: true,
+      autoHeight: true,
+      loop: false,
+      rewind: true,
+      autoplay: {
+        delay: 2000, // задержка между слайдами в миллисекундах         
+        disableOnInteraction: true, // отключается при взаимодействии
+      },
+      pagination: {
+        el: '.swiper-pagination1',
+        type: 'bullets',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next1',
+        prevEl: '.swiper-button-prev1',
+      },
+    });
+
   let swiper2 = document.querySelector('.swiper2')
   let swiperPagoda
   let swiperWhy
   let swiperDvuskat
-
+  
   let mql = window.matchMedia('(max-width: 665px)');
   if (mql.matches) {
     swiperPagoda = new Swiper('.swiper__pagoda', {
@@ -149,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clickable: true,
       },
     });
+    
   }
 
   window.addEventListener('resize', () => {
@@ -196,8 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       });
     } else {
-      swiperPagoda.destroy();
-      swiperWhy.destroy();
+      // swiperPagoda.destroy();
+      // swiperWhy.destroy();
+
     }
   })
   if (mql.matches && swiper2) {
