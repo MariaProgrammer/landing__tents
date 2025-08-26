@@ -44,14 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const items = Array.from(document.querySelectorAll('.gallery__item'))
     const mediaQuery = window.matchMedia('(min-width: 665px)')
-    
+
     if (scrollTop >= heroHeight) {
       headerTop.style.background = "#0A2341"
     } else {
       headerTop.style.background = "none"
     }
-    
-    if (scrollTop>= scrollTop2 && mediaQuery.matches) {
+
+    if (scrollTop >= scrollTop2 && mediaQuery.matches) {
       items.forEach(item => {
         item.classList.add('active')
       })
@@ -67,228 +67,205 @@ document.addEventListener('DOMContentLoaded', () => {
   const btn2 = document.querySelector('.btn-2')
   const sw1 = document.querySelector('.swiper1')
   const sw2 = document.querySelector('.swiper2')
-  
-  
-  btn1.addEventListener('click', ()=> {
-    if(!btn1.classList.contains('btn_dark') && !btn2.classList.contains('btn_transparent') && !btn2.classList.contains('btn_transparent-blue')) {
-      
+
+
+  btn1.addEventListener('click', () => {
+    if (!btn1.classList.contains('btn_dark') && !btn2.classList.contains('btn_transparent') && !btn2.classList.contains('btn_transparent-blue')) {
+
       btn1.classList.remove('btn_transparent')
       btn1.classList.remove('btn_transparent-blue')
       btn1.classList.add('btn_dark')
-      
+
       btn2.classList.remove('btn_dark')
       btn2.classList.add('btn_transparent')
       btn2.classList.add('btn_transparent-blue')
       sw1.style.display = 'flex'
-      swi2.style.display = 'none'
-    } 
+      sw2.style.display = 'none'
+    }
   })
-  btn2.addEventListener('click', ()=> {
-    if(!btn2.classList.contains('btn_dark') && !btn1.classList.contains('btn_transparent') && !btn1.classList.contains('btn_transparent-blue')) {
-      
+  btn2.addEventListener('click', () => {
+    if (!btn2.classList.contains('btn_dark') && !btn1.classList.contains('btn_transparent') && !btn1.classList.contains('btn_transparent-blue')) {
+
       btn2.classList.remove('btn_transparent')
       btn2.classList.remove('btn_transparent-blue')
       btn2.classList.add('btn_dark')
-     
+
       btn1.classList.remove('btn_dark')
       btn1.classList.add('btn_transparent')
       btn1.classList.add('btn_transparent-blue')
       sw1.style.display = 'none'
       sw2.style.display = 'flex'
-    } 
+    }
   })
   //инициализация слайдера
-  
-    const swiperPagoda = new Swiper('.swiper__pagoda', {
-    slidesPerView: 1,
-    slidesPerGroup: 1,
-    // centeredSlides: true,
-    direction: 'horizontal',
-    spaceBetween: 'auto',
-    lazy: true,
-    // autoHeight: true,
-    // loop: true,
-    // rewind: true,
-    autoplay: {
-      delay: 1000, // задержка между слайдами в миллисекундах
-      // enabled: true,    
-      disableOnInteraction: true, // отключается при взаимодействии
-    },
-    pagination: {
-      el: '.swiper-pagination2',
-      type: 'bullets',
-      clickable: true,
-      // dynamicBullets: true,
-    },
-  });
-  const swiperDvuskat = new Swiper('.swiper__dvuskat', {
-    slidesPerView: 1,
-    slidesPerGroup: 1,
-    // centeredSlides: true,
-    direction: 'horizontal',
-    spaceBetween: 'auto',
-    lazy: true,
-    autoHeight: true,
-    loop: true,
-    rewind: true,
-    autoplay: {
-      delay: 1000, // задержка между слайдами в миллисекундах
-      // enabled: true,    
-      disableOnInteraction: true, // отключается при взаимодействии
-    },
-    pagination: {
-      el: '.swiper-pagination3',
-      type: 'bullets',
-      clickable: true,
-      // dynamicBullets: true,
-    },
-  });
+  let swiper2 = document.querySelector('.swiper2')
+  // let swiperPagoda
+  // let swiperWhy
+  // let swiperDvuskat
+  let mql = window.matchMedia('(max-width: 665px)');
+  if (mql.matches) {
+    let swiperPagoda = new Swiper('.swiper__pagoda', {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      centeredSlides: false,
+      spaceBetween: 8,
+      grabCursor: true,
+      init: true,
+      lazy: true,
+      autoHeight: true,
+      loop: true,
+      rewind: true,
+      autoplay: {
+        delay: 2000, // задержка между слайдами в миллисекундах         
+        disableOnInteraction: true, // отключается при взаимодействии
+      },
+      pagination: {
+        el: '.swiper-pagination1',
+        type: 'bullets',
+        clickable: true,        
+      },
+    });    
+    
+    let swiperWhy = new Swiper('.swiper__why', {
+      slidesPerView: 1,
+        slidesPerGroup: 1,
+        centeredSlides: false,
+        spaceBetween: 8,
+        grabCursor: true,
+        init: true,
+        lazy: true,
+        autoHeight: true,
+        loop: true,
+        rewind: true,
+        autoplay: {
+          delay: 2000, // задержка между слайдами в миллисекундах         
+          disableOnInteraction: true, // отключается при взаимодействии
+        },
+        pagination: {
+          el: '.swiper-pagination2',
+          type: 'bullets',
+          clickable: true,          
+        },
+    });
+  }
 
-  const swiperWhy = new Swiper('.swiper__why', {
-    slidesPerView: 1,
-    slidesPerGroup: 1,
-    // centeredSlides: true,
-    direction: 'horizontal',
-    spaceBetween: 'auto',
-    lazy: true,
-    autoHeight: true,
-    // loop: true,
-    // rewind: true,
-    autoplay: {
-      delay: 1000, // задержка между слайдами в миллисекундах
-      // enabled: true,    
-      disableOnInteraction: true, // отключается при взаимодействии
-    },
-    pagination: {
-      el: '.swiper-pagination2',
-      type: 'bullets',
-      clickable: true,
-      // dynamicBullets: true,
-    },
-  });
-  const swiperFaq = new Swiper('.swiper__faq', {
-    slidesPerView: 1,
-    slidesPerGroup: 1,
-    // centeredSlides: true,
-    direction: 'horizontal',
-    spaceBetween: 'auto',
-    lazy: true,
-    autoHeight: true,
-    // loop: true,
-    // rewind: true,
-    autoplay: {
-      delay: 1000, // задержка между слайдами в миллисекундах
-      // enabled: true,    
-      disableOnInteraction: true, // отключается при взаимодействии
-    },
-    pagination: {
-      el: '.swiper-pagination2',
-      type: 'bullets',
-      clickable: true,
-      // dynamicBullets: true,
-    },
-  });
-  const swiperReviews = new Swiper('.swiper__reviews', {
-    slidesPerView: 1,
-    slidesPerGroup: 1,
-    // centeredSlides: true,
-    direction: 'horizontal',
-    spaceBetween: 'auto',
-    lazy: true,
-    autoHeight: true,
-    // loop: true,
-    // rewind: true,
-    autoplay: {
-      delay: 1000, // задержка между слайдами в миллисекундах
-      // enabled: true,    
-      disableOnInteraction: true, // отключается при взаимодействии
-    },
-    pagination: {
-      el: '.swiper-pagination2',
-      type: 'bullets',
-      clickable: true,
-      // dynamicBullets: true,
-    },
-    navigation: {
-    nextEl: '.swiper-button-next1',
-    prevEl: '.swiper-button-prev1',
-  },
-  });
-
-  const changeDirection = (slider) => {
-  window.innerWidth >= 665 ? slider.destroy(true, true) : slider.init();
-  console.log(slider)
-};
-
-window.addEventListener("resize", () => {
-  changeDirection(swiperPagoda);
-  changeDirection(swiperDvuskat);
-  changeDirection(swiperWhy);
-  changeDirection(swiperFaq);
-  changeDirection(swiperReviews);
-});
-
-changeDirection(swiperDvuskat);
-changeDirection(swiperPagoda);
-changeDirection(swiperWhy);
-changeDirection(swiperFaq);
-changeDirection(swiperReviews);
-
-  
-  
-  // function checkScreenAndInitSwiper() {
-  //   // Устанавливаем нужный диапазон разрешений (например, от 768px)
-  //   const mediaQuery = window.matchMedia('(max-width: 665px)');
-
-  //   if (mediaQuery.matches) {
-  //     // Если разрешение больше или равно 768px, инициализируем Swiper
-  //     swiperPagoda.init();
-  //     console.log("Swiper initialized");
-  //     swiperDvuskat.init();
-  //     console.log("Swiper initialized");
-  //     swiper3.init();
-  //     console.log("Swiper initialized");
-  //     swiperFaq.init();
-  //     console.log("Swiper initialized");
-      
-      
-  //     console.log("Swiper initialized");
-  //   } else {
-  //     // Если разрешение меньше 768px, уничтожаем Swiper
-  //     swiperPagoda.destroy(true); // true - уничтожить слайды, false - не удалять элементы из DOM
-  //     swiperDvuskat.destroy(true); // true - уничтожить слайды, false - не удалять элементы из DOM
-  //     swiper3.destroy(true); // true - уничтожить слайды, false - не удалять элементы из DOM
-  //     swiperFaq.destroy(true); // true - уничтожить слайды, false - не удалять элементы из DOM
-  //     console.log("Swiper destroyed");
+  // window.addEventListener('resize', () => {
+  //   if (mql.matches) {
+  //     let swiperPagoda = new Swiper('.swiper__pagoda', {
+  //       slidesPerView: 1,
+  //       slidesPerGroup: 1,
+  //       centeredSlides: false,
+  //       spaceBetween: 8,
+  //       grabCursor: true,
+  //       init: true,
+  //       lazy: true,
+  //       autoHeight: true,
+  //       loop: true,
+  //       rewind: true,
+  //       autoplay: {
+  //         delay: 2000, // задержка между слайдами в миллисекундах         
+  //         disableOnInteraction: true, // отключается при взаимодействии
+  //       },
+  //       pagination: {
+  //         el: '.swiper-pagination1',
+  //         type: 'bullets',
+  //         clickable: true,          
+  //       },
+  //     });
+  //     let swiperWhy = new Swiper('.swiper__why', {
+  //       slidesPerView: 1,
+  //       slidesPerGroup: 1,
+  //       centeredSlides: false,
+  //       spaceBetween: 8,
+  //       grabCursor: true,
+  //       init: true,
+  //       lazy: true,
+  //       autoHeight: true,
+  //       loop: true,
+  //       rewind: true,
+  //       autoplay: {
+  //         delay: 2000, // задержка между слайдами в миллисекундах         
+  //         disableOnInteraction: true, // отключается при взаимодействии
+  //       },
+  //       pagination: {
+  //         el: '.swiper-pagination2',
+  //         type: 'bullets',
+  //         clickable: true,          
+  //       },
+  //     });
   //   }
-  // }
-  // checkScreenAndInitSwiper();
-  // window.addEventListener('resize', checkScreenAndInitSwiper);
+
+    // } else {
+    //   swiperPagoda.destroy();
+    //   swiperWhy.destroy();
+    // }
+  // })
+  if (mql.matches && swiper2) {
+  swiperDvuskat = new Swiper('.swiper__dvuskat', {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      centeredSlides: false,
+      spaceBetween: 8,
+      grabCursor: true,
+      init: true,
+      lazy: true,
+      autoHeight: true,
+      loop: true,
+      rewind: true,
+      autoplay: {
+        delay: 2000, // задержка между слайдами в миллисекундах         
+        disableOnInteraction: true, // отключается при взаимодействии
+      },
+      pagination: {
+        el: '.swiper-pagination3',
+        type: 'bullets',
+        clickable: true,        
+      },
+    });
+  }
   
-const cross = document.querySelector('.cross')
-const btnConsult = document.querySelector('.btn__consult')
-const popap = document.querySelector('.popap')
-const popapCover = document.querySelector('.popap__cover')
-const popapInner = document.querySelector('.popap__inner')
+  // const swiperReviews = new Swiper('.swiper__reviews', {
+  //   slidesPerView: 1,
+  //   slidesPerGroup: 1,
+  //   // centeredSlides: true,
+  //   direction: 'horizontal',
+  //   spaceBetween: 'auto',
+  //   lazy: true,
+  //   autoHeight: true,
+  //   // loop: true,
+  //   // rewind: true,
+  //   autoplay: {
+  //     delay: 1000, // задержка между слайдами в миллисекундах
+  //     // enabled: true,    
+  //     disableOnInteraction: true, // отключается при взаимодействии
+  //   },
+  //   pagination: {
+  //     el: '.swiper-pagination2',
+  //     type: 'bullets',
+  //     clickable: true,
+  //     // dynamicBullets: true,
+  //   },
+  //   navigation: {
+  //   nextEl: '.swiper-button-next1',
+  //   prevEl: '.swiper-button-prev1',
+  // },
+  // });
 
 
-
-btnConsult.addEventListener('click', () => {
-  
-  popap.style.display = 'block'  
-  
-  
-  
-
-})
-cross.addEventListener('click', () => {
-  popap.style.display = 'none'
-   
- 
+// popap
+  const cross = document.querySelector('.cross')
+  const btnConsult = document.querySelector('.btn__consult')
+  const popap = document.querySelector('.popap')
   
   
-
-})
+  btnConsult.addEventListener('click', () => {
+    popap.style.display = 'block'
+    
+  })
+  cross.addEventListener('click', () => {
+    popap.style.display = 'none'
+    
+  })
 
 
   //подключение флагов в форму
@@ -304,7 +281,7 @@ cross.addEventListener('click', () => {
     excludeCountries: ["in", "il"],
     preferredCountries: ["ru", "jp", "pk", "no"]
   });
-
+})
 
   //Маска для тел
 
@@ -364,32 +341,16 @@ cross.addEventListener('click', () => {
   // alert(result)
   // });
   //смотрю данные инпута
-// const formBtn = document.querySelector(".selection__btn")
-// let selector = document.querySelector(".tel")
-// console.log(selector)
-// formBtn.addEventListener('submit', (e) => {
-//   e.preventDefault()
-//   console.log(selector.value)
-// })
+  // const formBtn = document.querySelector(".selection__btn")
+  // let selector = document.querySelector(".tel")
+  // console.log(selector)
+  // formBtn.addEventListener('submit', (e) => {
+  //   e.preventDefault()
+  //   console.log(selector.value)
+  // })
+
 
   
-  //Popup
-  // const footerPopup = document.querySelector(".footer__popup");
-  // const footerPopupButton = document.querySelector(".footer__popup-button");
-  // const aboutClinica = document.querySelector(".about__clinica");
 
-  // footerPopupButton.addEventListener("click", () => {
-  //   footerPopup.classList.remove("active");
-  // });
-  // aboutClinica.addEventListener("mouseover", () => {
-  //   footerPopup.classList.add("active");
-  // document.body.classList.toggle("stop-scroll");
-  // });
-
-  // footerPopup.addEventListener("mouseover", () => {
-  // 	footerPopup.classList.add('active');
-
-  // });
-});
 
 
