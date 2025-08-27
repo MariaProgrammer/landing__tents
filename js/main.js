@@ -1,5 +1,6 @@
-'use strict'
 document.addEventListener('DOMContentLoaded', () => {
+
+
   //Плавный скролл
   const anchors = document.querySelectorAll('a[href*="#"]');
 
@@ -48,8 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (scrollTop >= heroHeight) {
       headerTop.style.background = "#0A2341"
+      headerTop.style.position = "fixed"
     } else {
       headerTop.style.background = "none"
+      headerTop.style.position = "absolute"
     }
 
     if (scrollTop >= scrollTop2 && mediaQuery.matches) {
@@ -68,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btn2 = document.querySelector('.btn-2')
   const sw1 = document.querySelector('.swiper1')
   const sw2 = document.querySelector('.swiper2')
-
 
   btn1.addEventListener('click', () => {
     if (!btn1.classList.contains('btn_dark') && !btn2.classList.contains('btn_transparent') && !btn2.classList.contains('btn_transparent-blue')) {
@@ -98,187 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
       sw2.style.display = 'flex'
     }
   })
-  //инициализация слайдера
-  let swiperReviews = new Swiper('.swiper__reviews', {
-      slidesPerView: 2,
-      slidesPerGroup: 1,
-      centeredSlides: false,
-      spaceBetween: 20,
-      speed: 2500,
-      grabCursor: true,
-      init: true,
-      lazy: true,
-      autoHeight: true,
-      loop: false,
-      rewind: true,
-      autoplay: {
-        delay: 2000, // задержка между слайдами в миллисекундах         
-        disableOnInteraction: true, // отключается при взаимодействии
-      },
-      pagination: {
-        el: '.swiper-pagination1',
-        type: 'bullets',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next1',
-        prevEl: '.swiper-button-prev1',
-      },
-    });
-
-  let swiper2 = document.querySelector('.swiper2')
-  let swiperPagoda
-  let swiperWhy
-  let swiperDvuskat
-  
-  let mql = window.matchMedia('(max-width: 665px)');
-  if (mql.matches) {
-    swiperPagoda = new Swiper('.swiper__pagoda', {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-      centeredSlides: false,
-      spaceBetween: 8,
-      grabCursor: true,
-      init: true,
-      lazy: true,
-      autoHeight: true,
-      loop: true,
-      rewind: true,
-      autoplay: {
-        delay: 2000, // задержка между слайдами в миллисекундах         
-        disableOnInteraction: true, // отключается при взаимодействии
-      },
-      pagination: {
-        el: '.swiper-pagination1',
-        type: 'bullets',
-        clickable: true,
-      },
-    });
-
-    swiperWhy = new Swiper('.swiper__why', {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-      centeredSlides: false,
-      spaceBetween: 8,
-      grabCursor: true,
-      init: true,
-      lazy: true,
-      autoHeight: true,
-      loop: true,
-      rewind: true,
-      autoplay: {
-        delay: 2000, // задержка между слайдами в миллисекундах         
-        disableOnInteraction: true, // отключается при взаимодействии
-      },
-      pagination: {
-        el: '.swiper-pagination2',
-        type: 'bullets',
-        clickable: true,
-      },
-    });
-    
-  }
-
-  window.addEventListener('resize', () => {
-    if (mql.matches) {
-      swiperPagoda = new Swiper('.swiper__pagoda', {
-        slidesPerView: 1,
-        slidesPerGroup: 1,
-        centeredSlides: false,
-        spaceBetween: 8,
-        grabCursor: true,
-        init: true,
-        lazy: true,
-        autoHeight: true,
-        loop: true,
-        rewind: true,
-        autoplay: {
-          delay: 2000, // задержка между слайдами в миллисекундах         
-          disableOnInteraction: true, // отключается при взаимодействии
-        },
-        pagination: {
-          el: '.swiper-pagination1',
-          type: 'bullets',
-          clickable: true,
-        },
-      });
-      swiperWhy = new Swiper('.swiper__why', {
-        slidesPerView: 1,
-        slidesPerGroup: 1,
-        centeredSlides: false,
-        spaceBetween: 8,
-        grabCursor: true,
-        init: true,
-        lazy: true,
-        autoHeight: true,
-        loop: true,
-        rewind: true,
-        autoplay: {
-          delay: 2000, // задержка между слайдами в миллисекундах         
-          disableOnInteraction: true, // отключается при взаимодействии
-        },
-        pagination: {
-          el: '.swiper-pagination2',
-          type: 'bullets',
-          clickable: true,
-        },
-      });
-    } else {
-      // swiperPagoda.destroy();
-      // swiperWhy.destroy();
-
-    }
-  })
-  if (mql.matches && swiper2) {
-    swiperDvuskat = new Swiper('.swiper__dvuskat', {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-      centeredSlides: false,
-      spaceBetween: 8,
-      grabCursor: true,
-      init: true,
-      lazy: true,
-      autoHeight: true,
-      loop: true,
-      rewind: true,
-      autoplay: {
-        delay: 2000, // задержка между слайдами в миллисекундах         
-        disableOnInteraction: true, // отключается при взаимодействии
-      },
-      pagination: {
-        el: '.swiper-pagination3',
-        type: 'bullets',
-        clickable: true,
-      },
-    });
-  }
-
-  // const swiperReviews = new Swiper('.swiper__reviews', {
-  //   slidesPerView: 1,
-  //   slidesPerGroup: 1,
-  //   // centeredSlides: true,
-  //   direction: 'horizontal',
-  //   spaceBetween: 'auto',
-  //   lazy: true,
-  //   autoHeight: true,
-  //   // loop: true,
-  //   // rewind: true,
-  //   autoplay: {
-  //     delay: 1000, // задержка между слайдами в миллисекундах
-  //     // enabled: true,    
-  //     disableOnInteraction: true, // отключается при взаимодействии
-  //   },
-  //   pagination: {
-  //     el: '.swiper-pagination2',
-  //     type: 'bullets',
-  //     clickable: true,
-  //     // dynamicBullets: true,
-  //   },
-  //   navigation: {
-  //   nextEl: '.swiper-button-next1',
-  //   prevEl: '.swiper-button-prev1',
-  // },
-  // });
 
 
   // popap
@@ -295,6 +116,186 @@ document.addEventListener('DOMContentLoaded', () => {
     popap.style.display = 'none'
 
   })
+
+  //инициализация слайдера
+
+  const swiperReviews = new Swiper('.swiper__reviews', {
+    direction: 'horizontal',
+    slidesPerView: 2,
+    slidesPerGroup: 1,
+    spaceBetween: 20,
+    // centeredSlides: true,
+    speed: 2000,
+    loop: false,
+    watchSlidesProgress: true,
+    watchSlidesVisibility: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next1',
+      prevEl: '.swiper-button-prev1',
+    },
+    breakpoints: {
+      // При ширине >= 320px и до 980px показывать пагинацию
+      0: {
+        slidesPerView: 1,       
+      },
+
+      774: {
+        slidesPerView: 2,        
+      },
+      // При ширине > 980px скрывать пагинацию
+      
+    },
+  });
+
+  let currentIndex = 0;
+  const totalSlides = document.querySelectorAll('.swiper__reviews .swiper-slide').length;
+
+  let autoScrollInterval = null;
+  let autoRestartTimeout = null; // таймер для автоповторного запуска
+
+  const startAutoScroll = () => {
+    if (autoScrollInterval) clearInterval(autoScrollInterval);
+    autoScrollInterval = setInterval(() => {
+      currentIndex++;
+      if (currentIndex >= totalSlides) currentIndex = 0;
+      swiperReviews.slideTo(currentIndex, 2000);
+    }, 2500);
+  };
+
+  const stopAutoScroll = () => {
+    if (autoScrollInterval) {
+      clearInterval(autoScrollInterval);
+      autoScrollInterval = null;
+    }
+    // Очищаем задержку перед повторным запуском
+    if (autoRestartTimeout) {
+      clearTimeout(autoRestartTimeout);
+      autoRestartTimeout = null;
+    }
+  };
+
+  // Функция для автоматического перезапуска через 4 сек
+  const scheduleAutoScrollRestart = () => {
+    // Очистить старый таймаут, если есть
+    if (autoRestartTimeout) clearTimeout(autoRestartTimeout);
+    autoRestartTimeout = setTimeout(() => {
+      startAutoScroll();
+    }, 4000);
+  };
+
+  // Запускаем автопрокрутку при загрузке
+  startAutoScroll();
+
+  // Обработчики для кнопок
+  document.querySelector('.swiper-button-next1').addEventListener('click', () => {
+    stopAutoScroll();
+    currentIndex++;
+    if (currentIndex >= totalSlides) currentIndex = 0;
+    swiperReviews.slideTo(currentIndex, 2000);
+    scheduleAutoScrollRestart(); // планируем автоповтор через 4 сек
+  });
+  document.querySelector('.swiper-button-prev1').addEventListener('click', () => {
+    stopAutoScroll();
+    currentIndex--;
+    if (currentIndex < 0) currentIndex = totalSlides - 1;
+    swiperReviews.slideTo(currentIndex, 2000);
+    scheduleAutoScrollRestart(); // планируем автоповтор через 4 сек
+  });
+
+
+const sliders = [
+  { id: 'slider2', swiper: null, active: false },
+  { id: 'slider3', swiper: null, active: false },
+  { id: 'slider4', swiper: null, active: false },
+  { id: 'slider5', swiper: null, active: false },
+  { id: 'slider6', swiper: null, active: false },
+];
+
+let isMobile = false;
+
+// Включение слайдера
+function enableSwiper(slider) {
+  if (!slider.swiper) {
+    slider.swiper = new Swiper('#' + slider.id + ' .swiper', {
+      direction: 'horizontal',
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      spaceBetween: 20,
+      // centeredSlides: true,
+      speed: 2000,
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: true,
+      },
+      pagination: {
+        el: '#' + slider.id + ' .swiper-pagination',
+        clickable: true,
+      },
+    });
+    // при свайпе — отключить автопрокрутку
+    slider.swiper.on('slideChange', () => {
+      slider.swiper.autoplay.stop();
+    });
+  }
+  // Включаем возможность свайпа
+  slider.swiper.allowTouchMove = true;
+  // добавляем класс, чтобы видеть что активен
+  document.getElementById(slider.id).classList.remove('swiper-inactive');
+  slider.active = true;
+}
+
+// Отключение слайдера без удаления DOM
+function disableSwiper(slider) {
+  if (slider.swiper) {
+    // Остановить автопрокрутку
+    slider.swiper.autoplay.stop();
+    // отключить свайпы
+    slider.swiper.allowTouchMove = false;
+    // отключить обработчик slideChange
+    slider.swiper.off('slideChange');
+    // оставить DOM как есть, убрать класс активного
+    document.getElementById(slider.id).classList.add('swiper-inactive');
+  }
+  slider.active = false;
+}
+
+// Обработка resize
+function handleResize() {
+  if (window.innerWidth < 665) {
+    // включить слайдеры
+    sliders.forEach(s => {
+      if (!s.active) {
+        enableSwiper(s);
+      }
+    });
+    // запустить автоп прокрутку
+    sliders.forEach(s => {
+      if (s.swiper && !s.swiper.autoplay.running) {
+        s.swiper.autoplay.start();
+      }
+    });
+  } else {
+    // отключить слайдеры
+    sliders.forEach(s => {
+      if (s.active && s.swiper) {
+        disableSwiper(s);
+      }
+    });
+  }
+}
+
+// Изначально вызываем
+handleResize();
+
+// Обработчик resize
+window.addEventListener('resize', handleResize);
+
+
 
 
   //подключение флагов в форму

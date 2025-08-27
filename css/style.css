@@ -836,7 +836,7 @@ body {
 }
 .popap {
   display: none;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -889,11 +889,15 @@ body {
   margin-bottom: 3rem;
 }
 
+body {
+  position: relative;
+}
+
 .header {
   position: relative;
 }
 .header__top {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
@@ -1684,20 +1688,12 @@ input:focus::placeholder {
   border-radius: 100px;
 }
 .reviews__inner {
-  padding: 0 5rem;
+  padding: 0 2rem;
 }
 .reviews__inner .swiper-button-prev1,
 .reviews__inner .swiper-button-next1 {
   display: inline-block;
   width: 8rem;
-}
-.reviews__inner .swiper-button-prev1 {
-  position: relative;
-  transform: translateX(-100%);
-}
-.reviews__inner .swiper-button-next1 {
-  position: relative;
-  transform: translateX(100%);
 }
 .reviews__top {
   display: flex;
@@ -1705,16 +1701,29 @@ input:focus::placeholder {
   justify-content: space-between;
 }
 .reviews__btns {
+  flex: 0 0 auto;
   display: flex;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   gap: 2rem;
   margin-bottom: 4rem;
 }
+.reviews__btn {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .reviews__title {
   color: #0A2341;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  flex: 1 1 auto;
 }
 .reviews__card {
   display: flex;
-  height: 50rem;
+  height: 100%;
   max-width: 75rem;
   width: 100%;
   padding: 3rem;
@@ -1738,44 +1747,46 @@ input:focus::placeholder {
 .reviews .swiper__reviews {
   width: 100%;
   height: 100%;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
   padding-bottom: 3rem;
 }
 .reviews .swiper__reviews .swiper-wrapper {
-  width: auto;
+  width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  overflow: hidden;
+  align-items: stretch;
+  justify-content: flex-start;
   padding-bottom: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .reviews .swiper__reviews .swiper-slide {
-  width: auto;
+  width: calc(100% - 20px);
   height: auto;
-  max-width: 75rem;
 }
-
-.swiper__reviews-btns {
+.reviews .swiper-reviews__btns {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: absolute;
-  top: 40%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1000;
 }
 
 .reviews__card-right {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .reviews__card-box {
+  margin-top: auto;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
 }
 .reviews__card-box_left img {
@@ -1979,6 +1990,24 @@ p.desc--white:not(:last-child) {
     grid-row: 2/3;
   }
 
+  .reviews__card {
+    flex-direction: column;
+    padding: 2rem;
+  }
+  .reviews__card-box {
+    margin-top: 6rem;
+  }
+
+  .reviews__img {
+    display: block;
+    max-height: 28.2rem;
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
+
   .footer__top-content {
     gap: 5rem;
   }
@@ -2143,6 +2172,19 @@ p.desc--white:not(:last-child) {
   .real-projects__item-10 {
     grid-column: auto;
     grid-row: auto;
+  }
+
+  .reviews__top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reviews .swiper-reviews__btns {
+    display: none;
+  }
+
+  .swiper__reviews .swiper-pagination {
+    display: none;
   }
 
   .contacts__box {
@@ -2326,17 +2368,23 @@ p.desc--white:not(:last-child) {
   }
 
   .swiper__pagoda {
+    display: flex;
     width: 100%;
     height: 100%;
-    overflow: visible;
+    overflow: hidden;
     position: relative;
     padding-bottom: 3rem;
   }
   .swiper__pagoda .swiper-wrapper {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
+    justify-content: flex-start;
     overflow: visible;
     padding-bottom: 3rem;
+  }
+  .swiper__pagoda .swiper-wrapper .swiper-slide {
+    width: calc(100% - 20px);
+    height: auto;
   }
 
   .swiper-pagination1, .swiper-pagination2 {
@@ -2368,12 +2416,11 @@ p.desc--white:not(:last-child) {
   }
 
   .products, .why, .real-projects {
-    padding: 60px 20px;
+    padding: 60px 0;
   }
 
   .product-card {
-    min-width: 270px;
-    max-width: 100%;
+    width: 100%;
   }
   .product-card:hover {
     transform: translateY(0px);
@@ -2398,13 +2445,14 @@ p.desc--white:not(:last-child) {
   .why {
     width: 100%;
     height: auto;
-    padding-bottom: 10rem;
+    padding: 6rem 0 10rem 0;
   }
 
   .swiper__why {
+    display: flex;
     width: 100%;
     height: 100%;
-    overflow: visible;
+    overflow: hidden;
     position: relative;
     padding-bottom: 3rem;
   }
@@ -2412,7 +2460,8 @@ p.desc--white:not(:last-child) {
     width: auto;
     height: auto;
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
+    justify-content: flex-start;
     overflow: visible;
     padding-bottom: 3rem;
   }
@@ -2420,7 +2469,7 @@ p.desc--white:not(:last-child) {
   .why__item {
     flex: 0 0 300px;
     max-width: 335px;
-    height: 339px !important;
+    height: auto;
     box-sizing: border-box;
   }
 
@@ -2468,6 +2517,7 @@ p.desc--white:not(:last-child) {
   }
   .real-projects__gallery {
     display: flex;
+    padding-bottom: 3rem;
   }
   .real-projects__item-1 {
     transform: scale(1);
@@ -2498,6 +2548,73 @@ p.desc--white:not(:last-child) {
   }
   .real-projects__item-10 {
     transform: scale(1);
+  }
+
+  .swiper__gallery {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 3rem;
+  }
+  .swiper__gallery .swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow: visible;
+    padding-bottom: 3rem;
+  }
+  .swiper__gallery .swiper-wrapper .swiper-slider {
+    width: calc(100% - 20px);
+    height: auto;
+  }
+
+  .real-projects__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+
+  .reviews {
+    padding: 6rem 0;
+  }
+
+  .reviews__btns {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .reviews__btn {
+    width: 100%;
+  }
+
+  .reviews__inner {
+    padding: 0;
+  }
+
+  .swiper__faq {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 3rem;
+  }
+  .swiper__faq .swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    overflow: visible;
+    padding-bottom: 3rem;
+  }
+
+  .faq__item {
+    width: calc(100% - 20px);
+    height: auto;
   }
 
   .footer {
