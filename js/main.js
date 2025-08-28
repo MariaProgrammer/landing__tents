@@ -216,10 +216,11 @@ const sliders = [
 ];
 
 let autoInterval = null;
+let autoStartTimeout = null; // таймер для автозапуска через 4 сек
 
-// Включить слайдер
+// Включение слайдера
 function enableSwiper(slider) {
-  if (slider.swiper) return; // уже есть
+  if (slider.swiper) return;
   slider.swiper = new Swiper('#' + slider.id + ' .swiper', {
     direction: 'horizontal',
     slidesPerView: 1,
@@ -227,30 +228,30 @@ function enableSwiper(slider) {
     spaceBetween: 20,
     speed: 2000,
     allowTouchMove: true,
-    loop: false, // отключили встроенный цикл
+    loop: false,
     pagination: {
       el: '#' + slider.id + ' .swiper-pagination',
       clickable: true,
     },
   });
-  // при свайпе — отключить автопрокрутку
+
   slider.swiper.on('touchStart', () => {
     stopAuto();
+    cancelAutoStart(); // при свайпе отменяем таймер автозапуска
   });
-  // при автоматическом переключении — обновляем текущий слайд
+
   slider.swiper.on('slideChange', () => {
     slider.currentSlide = slider.swiper.activeIndex;
   });
-  // Включить свайпы
-  slider.swiper.allowTouchMove = true;
-  slider.currentSlide = 0; // старт
+
   slider.active = true;
 }
 
-// Отключить слайдер (без удаления элементов)
+// Отключение слайдера (без удаления DOM)
 function disableSwiper(slider) {
   if (slider.swiper) {
-    stopAuto();
+    stopAuto(); // останавливаем автоп прокрутку
+    cancelAutoStart(); // отменяем запуск через 4 сек, если был
     slider.swiper.allowTouchMove = false;
     slider.swiper.off('touchStart');
     slider.swiper.off('slideChange');
@@ -258,24 +259,24 @@ function disableSwiper(slider) {
   slider.active = false;
 }
 
-// Запуск бесконечной автопереключалки
+// Запуск автопрокрутки
 function startAuto() {
   stopAuto();
+  cancelAutoStart();
+
   autoInterval = setInterval(() => {
     sliders.forEach(s => {
       if (s.swiper) {
         let nextSlide = s.currentSlide + 1;
-        if (nextSlide >= s.swiper.slides.length) {
-          nextSlide = 0; // возвращаемся к первому
-        }
+        if (nextSlide >= s.swiper.slides.length) nextSlide = 0;
         s.swiper.slideTo(nextSlide);
-        s.currentSlide = nextSlide; // сохраняем позицию
+        s.currentSlide = nextSlide;
       }
     });
   }, 3500);
 }
 
-// Остановка
+// Остановка автопрокрутки
 function stopAuto() {
   if (autoInterval) {
     clearInterval(autoInterval);
@@ -283,30 +284,48 @@ function stopAuto() {
   }
 }
 
+// Таймер для автоматического включения автопрокрутки через 4 сек
+function scheduleAutoStart() {
+  cancelAutoStart();
+  autoStartTimeout = setTimeout(() => {
+    startAuto();
+  }, 4000);
+}
+
+// отменить таймаут автозапуска
+function cancelAutoStart() {
+  if (autoStartTimeout) {
+    clearTimeout(autoStartTimeout);
+    autoStartTimeout = null;
+  }
+}
+
 // Обработка resize
 function handleResize() {
   if (window.innerWidth < 665) {
-    // Включаем слайдеры
     sliders.forEach(s => {
       if (!s.active) {
         enableSwiper(s);
+        s.currentSlide = 0;
       }
     });
     startAuto();
   } else {
-    // Отключаем функционал
     sliders.forEach(s => {
       if (s.active && s.swiper) {
         disableSwiper(s);
       }
     });
+    stopAuto();
   }
 }
 
 // Изначально
 handleResize();
+
 // Обработчик resize
 window.addEventListener('resize', handleResize);
+
 
 
 
