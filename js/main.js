@@ -225,6 +225,7 @@ function enableSwiper(slider) {
     direction: 'horizontal',
     slidesPerView: 1,
     slidesPerGroup: 1,
+    centredSlides: true,
     spaceBetween: 20,
     speed: 2000,
     allowTouchMove: true,
