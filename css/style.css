@@ -918,8 +918,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 164rem;
-  margin: 0 auto;
 }
 .header__top-logo {
   display: block;
@@ -1008,6 +1006,11 @@ body {
 }
 .header__btn {
   width: 30rem;
+  transition: all ease 0.5s;
+}
+.header__btn:hover {
+  background: #B7CAEE;
+  color: #0A2341;
 }
 
 .header__inner {
@@ -1600,6 +1603,11 @@ input:focus::placeholder {
   justify-content: center;
   width: 100%;
   height: 7rem;
+  transition: all ease 0.5s;
+}
+.real-projects__btn:hover {
+  background: #B7CAEE;
+  color: #0A2341;
 }
 .real-projects__img {
   display: block;

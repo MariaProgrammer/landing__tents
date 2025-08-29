@@ -216,16 +216,17 @@ const sliders = [
 ];
 
 let autoInterval = null;
-let autoStartTimeout = null; // таймер для автозапуска через 4 сек
+let autoStartTimeout = null;
 
 // Включение слайдера
 function enableSwiper(slider) {
-  if (slider.swiper) return;
+  if (slider.swiper) return; // Если уже есть, не создаём повторно
+
   slider.swiper = new Swiper('#' + slider.id + ' .swiper', {
     direction: 'horizontal',
     slidesPerView: 1,
     slidesPerGroup: 1,
-    centredSlides: true,
+    centeredSlides: true,
     spaceBetween: 20,
     speed: 2000,
     allowTouchMove: true,
@@ -238,7 +239,7 @@ function enableSwiper(slider) {
 
   slider.swiper.on('touchStart', () => {
     stopAuto();
-    cancelAutoStart(); // при свайпе отменяем таймер автозапуска
+    cancelAutoStart();
   });
 
   slider.swiper.on('slideChange', () => {
@@ -251,13 +252,20 @@ function enableSwiper(slider) {
 // Отключение слайдера (без удаления DOM)
 function disableSwiper(slider) {
   if (slider.swiper) {
-    stopAuto(); // останавливаем автоп прокрутку
-    cancelAutoStart(); // отменяем запуск через 4 сек, если был
-    slider.swiper.allowTouchMove = false;
-    slider.swiper.off('touchStart');
-    slider.swiper.off('slideChange');
+    stopAuto();
+    cancelAutoStart();
+
+    // Отключение и удаление экземпляра
+    slider.swiper.destroy(true, true); // полностью удаляет DOM-структуру
+    slider.swiper = null; // обнуляем свойство
   }
   slider.active = false;
+
+  // Можно оставить класс или удалить его
+  const el = document.getElementById(slider.id);
+  if (el && el.classList.contains('swiper-initialized')) {
+    el.classList.remove('swiper-initialized', 'swiper-horizontal', 'swiper-backface-hidden');
+  }
 }
 
 // Запуск автопрокрутки
@@ -269,6 +277,7 @@ function startAuto() {
     sliders.forEach(s => {
       if (s.swiper) {
         let nextSlide = s.currentSlide + 1;
+        if (!s.swiper.slides || s.swiper.slides.length === 0) return; // защита
         if (nextSlide >= s.swiper.slides.length) nextSlide = 0;
         s.swiper.slideTo(nextSlide);
         s.currentSlide = nextSlide;
@@ -285,7 +294,7 @@ function stopAuto() {
   }
 }
 
-// Таймер для автоматического включения автопрокрутки через 4 сек
+// Таймер для автозапуска
 function scheduleAutoStart() {
   cancelAutoStart();
   autoStartTimeout = setTimeout(() => {
@@ -293,7 +302,7 @@ function scheduleAutoStart() {
   }, 4000);
 }
 
-// отменить таймаут автозапуска
+// Отмена автозапуска
 function cancelAutoStart() {
   if (autoStartTimeout) {
     clearTimeout(autoStartTimeout);
@@ -304,6 +313,7 @@ function cancelAutoStart() {
 // Обработка resize
 function handleResize() {
   if (window.innerWidth < 665) {
+    // Для каждого слайдера, если он не активен, активируем и сбрасываем текущий слайд
     sliders.forEach(s => {
       if (!s.active) {
         enableSwiper(s);
@@ -312,6 +322,7 @@ function handleResize() {
     });
     startAuto();
   } else {
+    // Для активных слайдеров — отключаем и уничтожаем
     sliders.forEach(s => {
       if (s.active && s.swiper) {
         disableSwiper(s);
@@ -326,7 +337,6 @@ handleResize();
 
 // Обработчик resize
 window.addEventListener('resize', handleResize);
-
 
 
 
