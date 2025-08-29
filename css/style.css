@@ -1980,7 +1980,7 @@ input:focus::placeholder {
   margin-right: auto;
   
 }
-a.footer__policy {  
+.footer__policy.text {  
   text-decoration: none;
 }
 
