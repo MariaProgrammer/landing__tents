@@ -1978,6 +1978,9 @@ input:focus::placeholder {
 }
 .footer__policy {
   margin-right: auto;
+  
+}
+a.footer__policy {  
   text-decoration: none;
 }
 
